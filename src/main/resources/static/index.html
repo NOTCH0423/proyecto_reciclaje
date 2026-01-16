@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciclaje IA</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Navigation -->
+        <aside class="sidebar" id="sidebar" role="dialog" aria-label="Menú" aria-hidden="true">
+            <div class="brand">
+                <span class="icon">♻️</span>
+                <h1>Reciclaje IA</h1>
+            </div>
+            <button class="touch-btn close-sidebar" id="closeSidebarBtn" aria-label="Cerrar menú">✕</button>
+            <nav class="nav-menu">
+                <button class="nav-btn active" onclick="setMode('auto')">🤖 Asistente Auto</button>
+                <button class="nav-btn" onclick="setMode('ai')">🧠 Modo Experto (IA)</button>
+                <div class="divider"></div>
+                <button class="nav-btn small" onclick="quickAsk('¿Qué reciclo?')">📅 Calendario</button>
+                <button class="nav-btn small" onclick="quickAsk('Puntos de acopio')">📍 Puntos Verdes</button>
+                <button class="nav-btn small" onclick="quickAsk('Quiz')">❓ Quiz Trivia</button>
+            </nav>
+            <div class="sidebar-footer">
+                <p>Versión Web 1.0</p>
+            </div>
+        </aside>
+        <div class="overlay" id="menuOverlay" aria-hidden="true"></div>
+
+        <!-- Main Chat Area -->
+        <main class="chat-area">
+            <header class="chat-header">
+                <button class="menu-toggle touch-btn" id="menuToggleBtn" aria-controls="sidebar" aria-expanded="false" onclick="toggleSidebar()">☰</button>
+                <h2 id="chat-title">Asistente de Reciclaje</h2>
+                <div class="header-actions">
+                    <button class="touch-btn" id="resetZoomBtn" title="Restablecer zoom" onclick="resetZoom()">🔎</button>
+                </div>
+                <span class="status-indicator online"></span>
+            </header>
+
+            <div class="messages-container" id="messages" aria-live="polite">
+                <div class="message bot">
+                    <div class="avatar">♻️</div>
+                    <div class="bubble">
+                        ¡Hola! Soy tu asistente de reciclaje inteligente. 
+                        <br>Pregúntame sobre plásticos, vidrio, o escribe <b>"quiz"</b> para jugar.
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <input type="text" id="userInput" placeholder="Escribe tu duda aquí..." onkeypress="handleEnter(event)" inputmode="text" autocomplete="off" enterkeyhint="send">
+                    <button class="send-btn touch-btn" id="sendBtn" onclick="sendMessage()">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="touch-actions">
+                    <button class="touch-btn danger" id="clearBtn">🗑️ Limpiar Chat</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

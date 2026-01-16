@@ -1,0 +1,41 @@
+# BASE DE CONOCIMIENTOS DE RECICLAJE (Entrenable)
+# Agrega aquí nuevos datos. El sistema buscará palabras clave y usará este contexto.
+
+[TEMA: PLASTICOS]
+Los plásticos se clasifican en 7 tipos.
+1. PET (Polietileno Tereftalato): Botellas de agua, refrescos. Altamente reciclable.
+2. HDPE (Polietileno de Alta Densidad): Envases de detergente, leche. Reciclable.
+3. PVC (Policloruro de Vinilo): Tuberías, cables. Difícil de reciclar.
+4. LDPE (Polietileno de Baja Densidad): Bolsas de supermercado. Reciclable en puntos específicos.
+5. PP (Polipropileno): Tapas de botellas, tuppers. Reciclable.
+6. PS (Poliestireno): Vasos desechables, unicel. Difícil y costoso de reciclar.
+7. Otros: Mezclas. Generalmente no reciclables.
+IMPORTANTE: Lava y aplasta los envases antes de reciclar.
+
+[TEMA: VIDRIO]
+El vidrio es 100% reciclable y puede reciclarse infinitamente sin perder calidad.
+No se reciclan: espejos, ventanas, cristales rotos de vasos (tienen diferente composición), focos o bombillas.
+Solo botellas, frascos y tarros.
+Retira las tapas y corchos.
+
+[TEMA: PAPEL Y CARTON]
+Se recicla: Periódicos, revistas, cajas de cartón, hojas de papel, sobres.
+NO se recicla: Papel con grasa (cajas de pizza sucias), papel higiénico, servilletas usadas, papel plastificado o encerado.
+El cartón debe estar seco y limpio. Desarma las cajas para ahorrar espacio.
+
+[TEMA: ELECTRONICOS]
+Los RAEE (Residuos de Aparatos Eléctricos y Electrónicos) no van a la basura común.
+Contienen metales pesados (mercurio, plomo) que contaminan el suelo.
+Llévalos a "Reciclones" o puntos verdes municipales.
+Celulares, computadoras, cables, baterías.
+
+[TEMA: BATERIAS]
+Las pilas alcalinas y de litio son muy contaminantes.
+Una sola pila de botón puede contaminar 600,000 litros de agua.
+Júntalas en una botella de plástico y llévalas a columnas de acopio específicas.
+Nunca las tires al drenaje ni a la basura orgánica.
+
+[TEMA: ACEITE]
+El aceite de cocina usado no se tira al fregadero. Un litro contamina 1000 litros de agua.
+Déjalo enfriar, fíltralo y guárdalo en una botella de plástico bien cerrada.
+Llévalo a centros de acopio para que lo conviertan en biodiésel o jabón.
