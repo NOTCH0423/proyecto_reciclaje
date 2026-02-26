@@ -15,6 +15,35 @@ public class Config {
         return title != null ? title : "Chatbot Educativo sobre Reciclaje";
     }
 
+    public static String getInventarioScriptUrl() {
+        String url = System.getenv("INVENTARIO_SCRIPT_URL");
+        if (url != null && !url.isBlank()) {
+            return url;
+        }
+        return "https://script.google.com/macros/s/AKfycbwLUWJs-PhULiqDi6zbNctVZGqzitqXEViBBEDRQbQVUvdta0HWxTRj2Q4_nCUtxSzY9g/exec";
+    }
+
+    // --- Configuración para Excel Online (Microsoft Graph) ---
+    public static String getMsTenantId() {
+        return System.getenv("MS_TENANT_ID");
+    }
+
+    public static String getMsClientId() {
+        return System.getenv("MS_CLIENT_ID");
+    }
+
+    public static String getMsClientSecret() {
+        return System.getenv("MS_CLIENT_SECRET");
+    }
+
+    public static String getExcelDriveId() {
+        return System.getenv("EXCEL_DRIVE_ID");
+    }
+
+    public static String getExcelItemId() {
+        return System.getenv("EXCEL_ITEM_ID");
+    }
+
     // Persist simple app settings under user home: ~/.reciclaje/config.properties
     private static final String APP_DIR = System.getProperty("user.home") + System.getProperty("file.separator") + ".reciclaje";
     private static final String CONFIG_FILE = APP_DIR + System.getProperty("file.separator") + "config.properties";

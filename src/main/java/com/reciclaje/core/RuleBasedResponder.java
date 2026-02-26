@@ -7,6 +7,7 @@ public class RuleBasedResponder implements Responder {
     private final RecyclingKnowledgeBase kb = new RecyclingKnowledgeBase();
     private String userName = null;
     private RecyclingKnowledgeBase.QuizQuestion activeQuiz = null;
+    private boolean justFinishedQuiz = false; // Track if we just finished a quiz
 
     @Override
     public String respond(String input) {
@@ -15,16 +16,41 @@ public class RuleBasedResponder implements Responder {
         }
         String text = normalize(input);
 
-        // Quiz Handling
+        // Quiz Handling - user is answering a quiz question
         if (activeQuiz != null) {
             boolean correct = text.contains(activeQuiz.answerKeyword);
             String response = correct ? "✅ " + activeQuiz.explanation : "❌ Incorrecto. " + activeQuiz.explanation;
             activeQuiz = null;
-            return response + "\n\n¿Quieres jugar otra vez? Escribe 'quiz'.";
+            justFinishedQuiz = true; // Mark that we just finished a quiz
+            return response + "\n\n¿Quieres jugar otra vez? Responde 'sí' o 'quiz' para continuar.";
         }
 
-        if (containsAny(text, "quiz", "jugar", "trivia", "pregunta")) {
+        // If we just finished a quiz, handle the response
+        if (justFinishedQuiz) {
+            if (isAffirmativeResponse(text)) {
+                // User wants to continue playing
+                justFinishedQuiz = false;
+                activeQuiz = kb.getQuizQuestion();
+                return "🧠 **PREGUNTA DE RECICLAJE** 🧠\n\n" + activeQuiz.question;
+            } else if (isNegativeResponse(text)) {
+                // User doesn't want to continue
+                justFinishedQuiz = false;
+                return "¡Perfecto! 👌\n" +
+                       "Si en algún momento quieres jugar de nuevo, solo escribe 'quiz'.\n" +
+                       "¿En qué más puedo ayudarte? Puedo darte información sobre:\n" +
+                       "• 📅 Días de recolección\n" +
+                       "• ♻️ Qué se recicla\n" +
+                       "• 🏪 Puntos de acopio\n" +
+                       "• 💡 Consejos de reciclaje";
+            }
+            // If response is unclear, reset flag and continue with normal flow
+            justFinishedQuiz = false;
+        }
+
+        // Start a new quiz
+        if (containsAny(text, "quiz", "jugar", "trivia", "pregunta", "otra pregunta", "siguiente pregunta")) {
             activeQuiz = kb.getQuizQuestion();
+            justFinishedQuiz = false;
             return "🧠 **PREGUNTA DE RECICLAJE** 🧠\n\n" + activeQuiz.question;
         }
 
@@ -77,6 +103,19 @@ public class RuleBasedResponder implements Responder {
             return kb.tips();
         }
         
+        // Handle short responses that might be ambiguous
+        if (text.length() <= 3 && !justFinishedQuiz) {
+            // For very short responses, provide helpful guidance
+            if (text.equals("si") || text.equals("sí") || text.equals("no")) {
+                return "No estoy seguro de qué te refieres con '" + input + "'. " +
+                       "¿Podrías ser más específico? Por ejemplo:\n" +
+                       "• '¿Qué puedo reciclar?'\n" +
+                       "• 'Dame consejos de reciclaje'\n" +
+                       "• 'Puntos de acopio'\n" +
+                       "• 'quiz' para jugar";
+            }
+        }
+        
         // Check for general questions first
         String generalResponse = kb.generalAnswer(input);
         if (generalResponse != null) {
@@ -116,6 +155,35 @@ public class RuleBasedResponder implements Responder {
     private boolean containsAny(String text, String... keywords) {
         for (String k : keywords) {
             if (text.contains(k)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isAffirmativeResponse(String text) {
+        // Check for common affirmative responses
+        String[] affirmatives = {
+            "si", "sí", "yes", "ok", "okay", "dale", "claro", "por supuesto", 
+            "por supuesto que si", "seguro", "vamos", "adelante", "continuar",
+            "otra vez", "otra", "siguiente", "mas", "más"
+        };
+        for (String aff : affirmatives) {
+            if (text.equals(aff) || text.startsWith(aff + " ") || text.endsWith(" " + aff)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isNegativeResponse(String text) {
+        // Check for common negative responses
+        String[] negatives = {
+            "no", "nope", "nah", "no gracias", "no quiero", "no quiero jugar",
+            "no gracias", "no por ahora", "ya no", "basta", "suficiente"
+        };
+        for (String neg : negatives) {
+            if (text.equals(neg) || text.startsWith(neg + " ") || text.endsWith(" " + neg)) {
                 return true;
             }
         }
