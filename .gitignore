@@ -31,6 +31,10 @@ Thumbs.db
 logs/
 *.log
 
+# Datos del modelo neuronal (se generan en runtime)
+base_data/neural-model/*.zip
+base_data/neural-model/*.csv
+
 # Compiled
 *.class
 *.jar

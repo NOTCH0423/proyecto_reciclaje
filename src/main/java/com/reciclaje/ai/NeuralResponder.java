@@ -14,9 +14,9 @@ public class NeuralResponder implements Responder {
     private ConversationLearner learner;
     private RuleBasedResponder baseResponder;
     private boolean isEnabled;
-    // Rutas para guardar el modelo y los datos de conversación en el Escritorio
-    private static final String DATA_PATH = "C:\\\\Users\\\\porto\\\\OneDrive\\\\Desktop\\\\base_data\\\\neural-model";
-    private static final String MODEL_PATH = DATA_PATH + "\\\\recycling-model.zip";
+    // Rutas para guardar el modelo y los datos de conversación DENTRO del proyecto
+    private static final String DATA_PATH = "base_data/neural-model";
+    private static final String MODEL_PATH = DATA_PATH + "/recycling-model.zip";
     
     /**
      * Constructor
